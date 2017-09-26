@@ -1,13 +1,15 @@
 package core;
-import java.applet.Applet;
+import java.awt.Container;
 public class Repainter extends Thread{
-	private Applet applet;
+	private Container container;
 	private final static String NAME="Repainter";
 	private boolean shouldRepaint;
 	private int delay=30;
-	 public Repainter(Applet applet,int delay){
+	/* repaint counter will tell me fps of the game*/
+	private int repaintCounter=0;
+	 public Repainter(Container container,int delay){
 		super(Repainter.NAME);
-		this.applet=applet;
+		this.container=container;
 		this.delay=delay;
 		this.shouldRepaint=true;
 		this.start();
@@ -25,7 +27,13 @@ public class Repainter extends Thread{
 				}catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				this.applet.repaint();
+				this.repaintCounter++;
+				System.out.println("repaint counter "+this.repaintCounter);
+				if(repaintCounter%40==0){
+					System.out.println("hit 40");
+
+				}
+				this.container.repaint();
 			}
 		}
 	}

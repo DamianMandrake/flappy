@@ -7,13 +7,14 @@ public class Bird{
 	private final static int xIncrement=10,yIncrement=10;
 	private int gravity=10;
 	private Color defaultColor=Color.RED;
-	private final static int MAXY=300;
-	public Bird(final int radius,final int initialX,final int initialY,final int gravity,Color c){
+	private int maxY=300;
+	public Bird(final int radius,final int initialX,final int initialY,final int gravity,Color c,int maxY){
 		this.radius=radius;
 		this.x=initialX;
 		this.y=initialY;
 		this.gravity=gravity;
 		this.defaultColor=c;
+		this.maxY=maxY;
 	}
 
 	public void goUp(){
@@ -29,18 +30,22 @@ public class Bird{
 	}
 	/* to be called everytime ... */
 	public void goDown(){
-		if(this.y < Bird.MAXY - 100){
+		if(this.y < this.maxY - 100){
 
 			this.y= this.y+(yIncrement *gravity) ;
 			System.out.println("y changed to "+y);
+			return ;
 		}
+		/* todo end the game */
 	}
 
 
 
 
 	public void paintTheBird(Graphics g){
+		g.setColor(this.defaultColor);
 		g.fillOval((int)this.x,(int)this.y,this.radius,this.radius);
+		g.setColor(Color.BLACK);
 	}
 
 

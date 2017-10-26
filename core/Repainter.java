@@ -5,8 +5,6 @@ public class Repainter extends Thread{
 	private final static String NAME="Repainter";
 	private boolean shouldRepaint;
 	private int delay=30;
-	/* repaint counter will tell me fps of the game*/
-	private int repaintCounter=0;
 	 public Repainter(Container container,int delay){
 		super(Repainter.NAME);
 		this.container=container;
@@ -26,12 +24,6 @@ public class Repainter extends Thread{
 					Thread.sleep(delay);
 				}catch (InterruptedException e) {
 					e.printStackTrace();
-				}
-				this.repaintCounter++;
-				System.out.println("repaint counter "+this.repaintCounter);
-				if(repaintCounter%40==0){
-					System.out.println("hit 40");
-
 				}
 				this.container.repaint();
 			}

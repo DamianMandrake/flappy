@@ -21,14 +21,16 @@ public class Flappy extends Frame {
 	private RectangleManager rectangleManager;
 	private final static int midH=200,midW=200,initRad=50,xDim=400,yDim=400;
 	private final static int DELAY=100;
-	Repainter repainter=null;
-	
+	private Repainter repainter=null;
+	private int score;
+	private String state="hit";
 	public Flappy(){
 		this.init();
 	}
 
 
 	private void init(){
+		this.score=0;
 		this.addKeyListener();
 		this.requestFocus();
 		this.setResizable(false);
@@ -60,15 +62,35 @@ public class Flappy extends Frame {
 
 	@Override
 	public void paint(Graphics g){
+				
 		bird.paintTheBird(g);
+		/* need to move this to another thread... since a lot */
 		this.rectangleManager.paintThemAll(g);
+
+		g.setColor(Color.GRAY);
+		g.drawString("score "+this.score ,10,10 );
+		g.drawString("state "+this.state,10,35);
+		g.setColor(Color.BLACK);
+
 	}
 
 
 	@Override
 	public void repaint(){
 		super.repaint();
+
 		this.bird.goDown();
+		boolean b=this.rectangleManager.isAlive(bird);
+		if(b){
+		this.state="alive";
+		this.score++;
+		}
+		else{
+			this.state="hit";
+			this.score--;
+			System.out.println("dead");
+		}
+		
 		/* changing a few params*/
 
 	}

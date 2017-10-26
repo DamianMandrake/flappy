@@ -35,7 +35,29 @@ public class Rectangles{
 		return this.x;
 	}
 	public boolean didItHit(Bird bird){
-		return false;
+		 if( bird.getX() > this.x && bird.getX() < this.x+WIDTH) {
+		 	if(this.y==0){
+			 	if( bird.getY() > this.y && bird.getY()< this.y+height ){
+			 		System.out.println("should die ");	
+			 		return false;
+			 	}
+			 return (bird.getY()>this.y);
+			 }
+			 System.out.println(" hit the bottom "+(bird.getY()>this.y ) );
+		 				 return (bird.getY()>this.y);
+
+		 }
+
+
+
+		 if(bird.getY() < this.y){
+		 	System.out.println("returning true by ty"+bird.getY() );
+		 	return true;
+		 }
+		 System.out.println("false");
+		 	
+		 return false;
+
 	}
 
 	public static int getRectangleWidth(){
@@ -49,7 +71,7 @@ public class Rectangles{
 
 
 	public final void paintTheRect(Graphics g){
-
+		System.out.println(" rect X "+this.x+" rect Y "+this.y+" width "+Rectangles.WIDTH+" height "+this.height);
 		g.fillRect(this.x,this.y,Rectangles.WIDTH,this.height);
 	
 	}

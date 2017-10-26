@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RectangleManager{
 	private ArrayList<Rectangles> rect; 
 	private int maxY,birdRadius,remainingSpace;
-	private final static int BIRD_PADDING=20,SCREEN_TOP=0,X_PADDING=100,QUEUE_SIZE=20,NUM_RECT_ON_SCREEN=4;
+	private final static int BIRD_PADDING=60,SCREEN_TOP=0,X_PADDING=100,QUEUE_SIZE=20,NUM_RECT_ON_SCREEN=4;
 	private int initX;
 	private int qPointer=0,oldQPointer=0;
 
@@ -55,7 +55,7 @@ public class RectangleManager{
 		System.out.println("gere");
 		for(int i=qPointer;i < qPointer+NUM_RECT_ON_SCREEN -1;i = (i+2) ){
 			System.out.println("painting "+i +" and "+(i+1));
-			Rectangles r=this.rect.get(i % QUEUE_SIZE ),r2=this.rect.get((i+1)%QUEUE_SIZE);
+			Rectangles r=this.rect.get(i),r2=this.rect.get((i+1));
 			r.paintTheRect(g);
 			r2.paintTheRect(g);
 
@@ -76,6 +76,7 @@ public class RectangleManager{
 		return 0;
 	}
 	public boolean isAlive(Bird bird){
+		System.out.println("qPointer is "+qPointer);
 		return ( this.rect.get(qPointer).didItHit(bird) || this.rect.get((qPointer+1) % QUEUE_SIZE).didItHit(bird));
 	}
 		
